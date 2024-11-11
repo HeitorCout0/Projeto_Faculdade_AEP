@@ -3,38 +3,36 @@
 #include <stdlib.h>
 #include <locale.h>
 
-// FunÁ„o para criptografar a senha usando Cifra de SubstituiÁ„o, incluindo letras e n˙meros
 void criptografarSenha(char* senha, int chave) {
     int i;
     for (i = 0; senha[i] != '\0'; i++) {
-        // Criptografar letras min˙sculas (a-z)
+        // Criptografar letras min√∫sculas (a-z)
         if (senha[i] >= 'a' && senha[i] <= 'z') {
             senha[i] = ((senha[i] - 'a' + chave) % 26) + 'a';
         }
-        // Criptografar letras mai˙sculas (A-Z)
+        // Criptografar letras mai√∫sculas (A-Z)
         else if (senha[i] >= 'A' && senha[i] <= 'Z') {
             senha[i] = ((senha[i] - 'A' + chave) % 26) + 'A';
         }
-        // Criptografar n˙meros (0-9)
+        // Criptografar n√∫meros (0-9)
         else if (senha[i] >= '0' && senha[i] <= '9') {
             senha[i] = ((senha[i] - '0' + chave) % 10) + '0';
         }
     }
 }
 
-// FunÁ„o para descriptografar a senha usando Cifra de CÈsar, incluindo letras e n˙meros
 void descriptografarSenha(char* senha, int chave) {
     int i;
     for (i = 0; senha[i] != '\0'; i++) {
-        // Descriptografar letras min˙sculas (a-z)
+        // Descriptografar letras min√∫sculas (a-z)
         if (senha[i] >= 'a' && senha[i] <= 'z') {
             senha[i] = ((senha[i] - 'a' - chave + 26) % 26) + 'a';
         }
-        // Descriptografar letras mai˙sculas (A-Z)
+        // Descriptografar letras mai√∫sculas (A-Z)
         else if (senha[i] >= 'A' && senha[i] <= 'Z') {
             senha[i] = ((senha[i] - 'A' - chave + 26) % 26) + 'A';
         }
-        // Descriptografar n˙meros (0-9)
+        // Descriptografar n√∫meros (0-9)
         else if (senha[i] >= '0' && senha[i] <= '9') {
             senha[i] = ((senha[i] - '0' - chave + 10) % 10) + '0';
         }
@@ -42,47 +40,47 @@ void descriptografarSenha(char* senha, int chave) {
 }
 
 int main() {
-    setlocale(LC_ALL, "portuguese");  /* Permitir colocar acentuaÁ„o em portuguÍs */
+    setlocale(LC_ALL, "portuguese");  /* Permitir colocar acentua√ß√£o em portugu√™s */
 
-    /* DeclaraÁ„o das vari·veis */
-    char nomes[100][50];     /* Array para armazenar atÈ 100 nomes de usu·rios */
-    char emails[100][50];    /* Array para armazenar atÈ 100 e-mails de usu·rios */
-    char senhas[100][50];    /* Array para armazenar atÈ 100 senhas criptografadas */
-    int qtdUsuarios = 0;     /* Contador para o n˙mero de usu·rios cadastrados */
+    /* Declara√ß√£o das vari√°veis */
+    char nomes[100][50];     /* Array para armazenar at√© 100 nomes de usu√°rios */
+    char emails[100][50];    /* Array para armazenar at√© 100 e-mails de usu√°rios */
+    char senhas[100][50];    /* Array para armazenar at√© 100 senhas criptografadas */
+    int qtdUsuarios = 0;     /* Contador para o n√∫mero de usu√°rios cadastrados */
     int opcao;
     int id;
-    int chaveCriptografia = 3;  /* Definindo uma chave para a Cifra de CÈsar (deslocamento de 3 caracteres) */
+    int chaveCriptografia = 3;  
 
     FILE *arquivoCriptografados;  /* Arquivo para armazenar dados com senha criptografada */
     FILE *arquivoDescriptografados;  /* Arquivo para armazenar dados com senha descriptografada */
 
     do {
         /* Menu */
-        printf("\nMenu de OpÁıes:\n");
-        printf("1. Incluir novo usu·rio\n");
-        printf("2. Alterar usu·rio\n");
-        printf("3. Excluir usu·rio\n");
-        printf("4. Listar usu·rios\n");
+        printf("\nMenu de Op√ß√µes:\n");
+        printf("1. Incluir novo usu√°rio\n");
+        printf("2. Alterar usu√°rio\n");
+        printf("3. Excluir usu√°rio\n");
+        printf("4. Listar usu√°rios\n");
         printf("5. Sair\n");
-        printf("Escolha uma opÁ„o: ");
+        printf("Escolha uma op√ß√£o: ");
         scanf("%d", &opcao);
         getchar();  /* Limpa o buffer do teclado */
 
         switch(opcao) {
             case 1:
-                /* Incluir novo usu·rio */
+                /* Incluir novo usu√°rio */
                 if (qtdUsuarios >= 100) {
-                    printf("Limite de usu·rios atingido!\n");
+                    printf("Limite de usu√°rios atingido!\n");
                 } else {
-                    printf("Informe o nome do usu·rio: ");
+                    printf("Informe o nome do usu√°rio: ");
                     fgets(nomes[qtdUsuarios], 50, stdin);
                     nomes[qtdUsuarios][strcspn(nomes[qtdUsuarios], "\n")] = '\0';  /* Remove o '\n' no final */
 
-                    printf("Informe o e-mail do usu·rio: ");
+                    printf("Informe o e-mail do usu√°rio: ");
                     fgets(emails[qtdUsuarios], 50, stdin);
                     emails[qtdUsuarios][strcspn(emails[qtdUsuarios], "\n")] = '\0';  /* Remove o '\n' no final */
 
-                    printf("Informe a senha do usu·rio: ");
+                    printf("Informe a senha do usu√°rio: ");
                     fgets(senhas[qtdUsuarios], 50, stdin);
                     senhas[qtdUsuarios][strcspn(senhas[qtdUsuarios], "\n")] = '\0';  /* Remove o '\n' no final */
 
@@ -110,20 +108,20 @@ int main() {
                     fclose(arquivoDescriptografados);
 
                     qtdUsuarios++;
-                    printf("Usu·rio incluÌdo com sucesso!\n");
+                    printf("Usu√°rio inclu√≠do com sucesso!\n");
                 }
                 break;
 
             case 2:
-                /* Alterar dados de um usu·rio */
-                printf("Informe o ID do usu·rio a ser alterado (1 a %d): ", qtdUsuarios);
+                /* Alterar dados de um usu√°rio */
+                printf("Informe o ID do usu√°rio a ser alterado (1 a %d): ", qtdUsuarios);
                 scanf("%d", &id);
                 getchar();  /* Limpa o buffer do teclado */
 
                 if (id < 1 || id > qtdUsuarios) {
-                    printf("Usu·rio n„o encontrado!\n");
+                    printf("Usu√°rio n√£o encontrado!\n");
                 } else {
-                    id--;  /* Ajuste para o Ìndice correto (0-based) */
+                    id--;  /* Ajuste para o √≠ndice correto (0-based) */
                     printf("Informe o novo nome: ");
                     fgets(nomes[id], 50, stdin);
                     nomes[id][strcspn(nomes[id], "\n")] = '\0';  /* Remove o '\n' no final */
@@ -162,20 +160,20 @@ int main() {
                     }
                     fclose(arquivoDescriptografados);
 
-                    printf("Usu·rio alterado com sucesso!\n");
+                    printf("Usu√°rio alterado com sucesso!\n");
                 }
                 break;
 
             case 3:
-                /* Excluir um usu·rio */
-                printf("Informe o ID do usu·rio a ser excluÌdo (1 a %d): ", qtdUsuarios);
+                /* Excluir um usu√°rio */
+                printf("Informe o ID do usu√°rio a ser exclu√≠do (1 a %d): ", qtdUsuarios);
                 scanf("%d", &id);
                 getchar();  /* Limpa o buffer do teclado */
 
                 if (id < 1 || id > qtdUsuarios) {
-                    printf("Usu·rio n„o encontrado!\n");
+                    printf("Usu√°rio n√£o encontrado!\n");
                 } else {
-                    id--;  /* Ajuste para o Ìndice correto (0-based) */
+                    id--;  /* Ajuste para o √≠ndice correto (0-based) */
                     int i;
                     for (i = id; i < qtdUsuarios - 1; i++) {
                         strcpy(nomes[i], nomes[i + 1]);
@@ -206,16 +204,16 @@ int main() {
                     }
                     fclose(arquivoDescriptografados);
 
-                    printf("Usu·rio excluÌdo com sucesso!\n");
+                    printf("Usu√°rio exclu√≠do com sucesso!\n");
                 }
                 break;
 
             case 4:
-                /* Listar todos os usu·rios */
+                /* Listar todos os usu√°rios */
                 if (qtdUsuarios == 0) {
-                    printf("N„o h· usu·rios cadastrados!\n");
+                    printf("N√£o h√° usu√°rios cadastrados!\n");
                 } else {
-                    printf("\nLista de Usu·rios:\n");
+                    printf("\nLista de Usu√°rios:\n");
                     int i;
                     for (i = 0; i < qtdUsuarios; i++) {
                         /* Descriptografa a senha para exibir */
@@ -232,7 +230,7 @@ int main() {
                 break;
 
             default:
-                printf("OpÁ„o inv·lida! Tente novamente.\n");
+                printf("Op√ß√£o inv√°lida! Tente novamente.\n");
         }
     } while (opcao != 5);
 
